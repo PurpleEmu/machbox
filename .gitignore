@@ -1,0 +1,6 @@
+#ignore build dir
+build/
+
+#ignore other stuff
+Makefile
+*.pro.user

@@ -26,6 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         core.cpp
 
-HEADERS  += core.h
+HEADERS  += core.h \
+    info.h
 
 FORMS    += core.ui

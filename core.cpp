@@ -6,6 +6,7 @@ Core::Core(QWidget *parent) :
     ui(new Ui::Core)
 {
     ui->setupUi(this);
+    this->setWindowTitle("MachBox");
 }
 
 Core::~Core()
