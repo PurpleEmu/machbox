@@ -1,6 +1,6 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2018-06-23T14:22:17
+# Project created by QtCreator 2018-06-23T15:02:15
 #
 #-------------------------------------------------
 
@@ -26,7 +26,4 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         core.cpp
 
-HEADERS  += core.h \
-    info.h
-
-FORMS    += core.ui
+HEADERS  += core.h
