@@ -3,4 +3,4 @@ build/
 
 #ignore other stuff
 Makefile
-*.pro.user
+machbox.pro.user
