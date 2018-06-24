@@ -5,37 +5,32 @@
 #include <QMenu>
 #include <QMenuBar>
 #include <QFileDialog>
+#include <QMessageBox>
 
 Core::Core(QWidget *parent): QMainWindow(parent)
 {
     this->setWindowTitle("MachBox");
-    QMenu *file;
-    file = menuBar()->addMenu("&File");
-    QAction *loadm = new QAction("&Load Mach-O", this);
-    QAction *loadk = new QAction("&Load KernelCache", this);
-    QAction *quit = new QAction("&Quit", this);
-    file->addAction(loadm);
-    file->addAction(loadk);
-    file->addAction(quit);
-    QMenu *lle;
-    lle = menuBar()->addMenu("&LLE");
-    QAction *loadv = new QAction("&Load SecureROM Dump", this);
-    QAction *loadn = new QAction("&Load NOR Dump", this);
-    QAction *loadb = new QAction("&Load Bootchain Components", this);
-    lle->addAction(loadv);
-    lle->addAction(loadn);
-    lle->addAction(loadb);
-    QMenu *about;
-    about = menuBar()->addMenu("&About");
-    QAction *aboutm = new QAction("&About MachBox", this);
-    about->addAction(aboutm);
+    QMenu *file = menuBar()->addMenu("&File");
+    QAction *loadm = file->addAction("&Load Mach-O");
+    QAction *loadk = file->addAction("&Load KernelCache");
+    QAction *quit = file->addAction("&Quit");
+    QMenu *lle = menuBar()->addMenu("&LLE");
+    QAction *loadv = lle->addAction("&Load SecureROM Dump");
+    QAction *loadn = lle->addAction("&Load NOR Dump");
+    QAction *loadb = lle->addAction("&Load Bootchain Components");
+    QMenu *devices = menuBar()->addMenu("&Devices");
+    QMenu* S5l8900X = devices->addMenu("&S5l8900");
+    QAction* iPhone2G = S5l8900X->addAction("&iPhone 2G");
+    QMenu *about = menuBar()->addMenu("&About");
+    QAction *aboutm = about->addAction("&About MachBox");
     connect(loadm, &QAction::triggered, this, &Core::loadMacho);
     connect(loadk, &QAction::triggered, this, &Core::loadKernelCache);
     connect(quit, &QAction::triggered, qApp, QApplication::quit);
     connect(loadv, &QAction::triggered, this, &Core::loadVROM);
     connect(loadn, &QAction::triggered, this, &Core::loadNOR);
     connect(loadb, &QAction::triggered, this, &Core::loadBootChain);
-    //connect(aboutm, &QAction::triggered, this, QApplication::quit);
+    //connect(iPhone2G, &QAction::triggered, this, &PurpleSapphire::iPhone2GSetCPU);
+    connect(aboutm, &QAction::triggered, this, &Core::aboutMachBox);
 }
 
 void Core::loadMacho()
@@ -71,6 +66,11 @@ void Core::loadBootChain()
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Select iBoot/LLB"), "",
         tr("All Files (*)"));
+}
+
+void Core::aboutMachBox()
+{
+    QMessageBox::about(this,tr("MachBox"), tr("MachBox is a WIP LLE/HLE iOS Emulator.\n\nCopyright 2018"));
 }
 
 Core::~Core()

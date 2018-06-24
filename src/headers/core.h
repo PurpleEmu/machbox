@@ -13,6 +13,7 @@ class Core : public QMainWindow
         void loadVROM();
         void loadNOR();
         void loadBootChain();
+        void aboutMachBox();
         ~Core();
 };
 
