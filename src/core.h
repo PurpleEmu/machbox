@@ -14,6 +14,7 @@ class Core : public QMainWindow
         void loadNOR();
         void loadBootChain();
         void aboutMachBox();
+        void selectDevice(std::string device);
         ~Core();
 };
 

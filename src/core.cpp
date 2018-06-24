@@ -29,8 +29,13 @@ Core::Core(QWidget *parent): QMainWindow(parent)
     connect(loadv, &QAction::triggered, this, &Core::loadVROM);
     connect(loadn, &QAction::triggered, this, &Core::loadNOR);
     connect(loadb, &QAction::triggered, this, &Core::loadBootChain);
-    //connect(iPhone2G, &QAction::triggered, this, &PurpleSapphire::iPhone2GSetCPU);
     connect(aboutm, &QAction::triggered, this, &Core::aboutMachBox);
+    /* disable until we need to enable */
+    loadm->setEnabled(false);
+    loadk->setEnabled(false);
+    loadv->setEnabled(false);
+    loadn->setEnabled(false);
+    loadb->setEnabled(false);
 }
 
 void Core::loadMacho()
@@ -71,6 +76,11 @@ void Core::loadBootChain()
 void Core::aboutMachBox()
 {
     QMessageBox::about(this,tr("MachBox"), tr("MachBox is a WIP LLE/HLE iOS Emulator.\n\nCopyright 2018"));
+}
+
+void Core::selectDevice(std::string device)
+{
+
 }
 
 Core::~Core()

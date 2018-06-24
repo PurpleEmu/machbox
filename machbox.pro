@@ -27,5 +27,5 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += src/main.cpp\
         src/core.cpp
 
-HEADERS  += src/headers/core.h \
-    src/headers/info.h
+HEADERS  += src/core.h \
+    src/info.h
