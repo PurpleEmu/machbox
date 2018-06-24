@@ -1,5 +1,5 @@
-#include "headers/core.h"
-#include "headers/info.h"
+#include "core.h"
+#include "info.h"
 
 #include <QApplication>
 

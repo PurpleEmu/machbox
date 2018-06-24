@@ -1,4 +1,4 @@
-#include "headers/core.h"
+#include "core.h"
 
 #include <QMainWindow>
 #include <QApplication>
