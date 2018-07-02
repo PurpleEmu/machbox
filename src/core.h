@@ -10,11 +10,8 @@ class Core : public QMainWindow
         Core(QWidget *parent = 0);
         void loadMacho();
         void loadKernelCache();
-        void loadVROM();
-        void loadNOR();
-        void loadBootChain();
+        void seliP2G();
         void aboutMachBox();
-        void selectDevice(std::string device);
         ~Core();
 };
 
