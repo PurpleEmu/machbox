@@ -1,0 +1,3 @@
+[submodule "src/ps"]
+	path = src/ps
+	url = https://github.com/PurpleEmu/PurpleSapphire

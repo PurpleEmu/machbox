@@ -15,43 +15,43 @@ find_package(Qt5 COMPONENTS Core Gui Widgets REQUIRED)
 set(SOURCES
     src/core.cpp
     src/main.cpp
-    src/ps/aes.cpp
-    src/ps/arm.cpp
-    src/ps/clock.cpp
-    src/ps/cp15.cpp
-    src/ps/dmac.cpp
-    src/ps/gpio.cpp
-    src/ps/iphone2g.cpp
-    src/ps/iphone3gs.cpp
-    src/ps/power.cpp
-    src/ps/sha1.cpp
-    src/ps/spi.cpp
-    src/ps/timer.cpp
-    src/ps/usb_otg.cpp
-    src/ps/usb_phy.cpp
-    src/ps/vic.cpp
-    src/ps/wdt.cpp
+    src/ps/src/aes.cpp
+    src/ps/src/arm.cpp
+    src/ps/src/clock.cpp
+    src/ps/src/cp15.cpp
+    src/ps/src/dmac.cpp
+    src/ps/src/gpio.cpp
+    src/ps/src/iphone2g.cpp
+    src/ps/src/iphone3gs.cpp
+    src/ps/src/power.cpp
+    src/ps/src/sha1.cpp
+    src/ps/src/spi.cpp
+    src/ps/src/timer.cpp
+    src/ps/src/usb_otg.cpp
+    src/ps/src/usb_phy.cpp
+    src/ps/src/vic.cpp
+    src/ps/src/wdt.cpp
 )
 set(HEADERS
     src/core.h
     src/info.h
-    src/ps/aes.h
-    src/ps/arm.h
-    src/ps/clock.h
-    src/ps/common.h
-    src/ps/cp15.h
-    src/ps/dmac.h
-    src/ps/gpio.h
-    src/ps/iphone2g.h
-    src/ps/iphone3gs.h
-    src/ps/power.h
-    src/ps/sha1.h
-    src/ps/spi.h
-    src/ps/timer.h
-    src/ps/usb_otg.h
-    src/ps/usb_phy.h
-    src/ps/vic.h
-    src/ps/wdt.h
+    src/ps/src/aes.h
+    src/ps/src/arm.h
+    src/ps/src/clock.h
+    src/ps/src/common.h
+    src/ps/src/cp15.h
+    src/ps/src/dmac.h
+    src/ps/src/gpio.h
+    src/ps/src/iphone2g.h
+    src/ps/src/iphone3gs.h
+    src/ps/src/power.h
+    src/ps/src/sha1.h
+    src/ps/src/spi.h
+    src/ps/src/timer.h
+    src/ps/src/usb_otg.h
+    src/ps/src/usb_phy.h
+    src/ps/src/vic.h
+    src/ps/src/wdt.h
 )
 add_executable(machbox ${SOURCES})
 target_link_libraries(machbox Qt5::Core Qt5::Gui Qt5::Widgets ssl crypto)

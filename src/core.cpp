@@ -7,10 +7,10 @@
 #include <QFileDialog>
 #include <QMessageBox>
 
-#include "ps/common.h"
-#include "ps/arm.h"
-#include "ps/iphone2g.h"
-#include "ps/iphone3gs.h"
+#include "ps/src/common.h"
+#include "ps/src/arm.h"
+#include "ps/src/iphone2g.h"
+#include "ps/src/iphone3gs.h"
 
 bool bootromhle;
 
