@@ -24,12 +24,15 @@ Core::Core(QWidget *parent): QMainWindow(parent)
     QMenu *devices = menuBar()->addMenu("&Devices");
     QMenu* S5l8900X = devices->addMenu("&S5l8900");
     QAction* iPhone2G = S5l8900X->addAction("&iPhone 2G");
+    QMenu* S5l8920X = devices->addMenu("&S5l8920");
+    QAction* iPhone3GS = S5l8920X->addAction("&iPhone 3GS");
     QMenu *about = menuBar()->addMenu("&About");
     QAction *aboutm = about->addAction("&About MachBox");
     connect(loadm, &QAction::triggered, this, &Core::loadMacho);
     connect(loadk, &QAction::triggered, this, &Core::loadKernelCache);
     connect(quit, &QAction::triggered, qApp, QApplication::quit);
     connect(iPhone2G, &QAction::triggered, this, &Core::seliP2G);
+    connect(iPhone3GS, &QAction::triggered, this, &Core::seliP3GS);
     connect(aboutm, &QAction::triggered, this, &Core::aboutMachBox);
     /* disable until we need to enable */
     loadm->setEnabled(false);
@@ -163,6 +166,77 @@ void Core::seliP2G()
                 cpu.run(1);
                 dev->tick();
             }
+        }
+        dev->exit();
+        free(dev);
+        break;
+    }
+}
+
+void Core::seliP3GS()
+{
+    //Since the bootrom HLE isn't implemented for the iPhone 3GS in vanilla PurpleSapphire, we're not going to implement it here either.
+    bool cont = true;
+    bootromhle = false;
+    /* insanity */
+    QString vromName = QFileDialog::getOpenFileName(this, tr("Select VROM"), "", tr("All Files (*)")); if(vromName.isEmpty()){printf("User didn't select VROM\n"); cont = false;}
+    QString norName = QFileDialog::getOpenFileName(this, tr("Select NOR"), "", tr("All Files (*)")); if(norName.isEmpty()){printf("User didn't select NOR Dump\n"); cont = false;}
+    QString iBootName = QFileDialog::getOpenFileName(this, tr("Select iBoot"), "", tr("All Files (*)")); if(iBootName.isEmpty()){printf("User didn't select iBoot\n"); cont = false;}
+    while(cont)
+    {
+        /* convert qstrings to char for file */
+        QByteArray vromx = vromName.toLatin1();
+        QByteArray norx = norName.toLatin1();
+        QByteArray iBootx = iBootName.toLatin1();
+        //printf("everyone is alive\n");
+        const char *vrom = vromx.data();
+        const char *nor = norx.data();
+        const char *iboot = iBootx.data();
+        //printf("we survived the crash\n");
+        //printf("sane: %s\n", vrom);
+        //printf("sane: %s\n", nor);
+        //printf("sane: %s\n", iboot);
+        iphone3gs* dev = (iphone3gs*)malloc(sizeof(iphone3gs));
+        arm_cpu cpu;
+        cpu.type = arm_type::cortex_a8;
+        cpu.init();
+        dev->cpu = &cpu;
+        dev->init();
+        cpu.device = dev;    
+        cpu.rw_real = iphone3gs_rw;
+        cpu.ww_real = iphone3gs_ww;
+        FILE* fp = fopen(vrom, "rb");
+        if(!fp)
+        {
+            printf("unable to open %s, are you sure it exists?\n", vrom);
+            break;
+        }
+        if(fread(dev->bootrom, 1, 0x10000, fp) != 0x10000)
+        {
+            printf("unable to load vrom\n");
+            fclose(fp);
+            break;
+        }
+        fclose(fp);
+        fp = fopen(nor, "rb");
+        if(!fp)
+        {
+            printf("unable to open %s, are you sure it exists?\n", nor);
+            break;
+        }
+        s64 norsize = ftell(fp);
+        if(fread(dev->nor, 1, 0x100000, fp) != 0x100000)
+        {
+            printf("unable to load nor\n");
+            fclose(fp);
+            break;
+        }
+        fclose(fp);
+
+        for(int i = 0; i < 40000; i++)
+        {
+            cpu.run(1);
+            dev->tick();
         }
         dev->exit();
         free(dev);

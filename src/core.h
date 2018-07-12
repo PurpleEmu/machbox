@@ -8,11 +8,12 @@ class Core : public QMainWindow
     Q_OBJECT
     public:
         Core(QWidget *parent = 0);
+        ~Core();
         void loadMacho();
         void loadKernelCache();
         void seliP2G();
+        void seliP3GS();
         void aboutMachBox();
-        ~Core();
 };
 
 #endif // CORE_H
